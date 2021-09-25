@@ -32,10 +32,12 @@ function displayResults(weather) {
 
     let weather_el = document.querySelector(".current .weather");
     let main = weather.weather[0].main;
-    console.log(main);
-    document.body.style.backgroundImage = `url(${setBackground(main)})`
-    console.log(setBackground(main));
+    document.body.style.backgroundImage = `url(${setBackground(main)})`;
+
     weather_el.innerText = main;
+
+    let feelsLike = document.querySelector(".feels-like");
+    feelsLike.innerHTML = `${Math.round(weather.main.feels_like)}°C `;
 
     let hiLow = document.querySelector(".hi-low");
     hiLow.innerText = `${Math.round(weather.main.temp_max)}°C / ${Math.round(
@@ -66,24 +68,32 @@ function dateBuilder(d) {
 }
 
 function setBackground(main) {
+    let picture = [
+        { id: 0, path: "./images/sunny3.jpg" },
+        { id: 1, path: "./images/sunny1.jpg" },
+        { id: 2, path: "./images/Cloudy.jpg" },
+        { id: 3, path: "./images/Cloudy3.jpg" },
+        { id: 4, path: "./images/stormy.jpg" },
+        { id: 5, path: "./images/snow.jpg" },
+        { id: 6, path: "./images/Thunder.jpg" },
+        { id: 7, path: "./images/Rain.jpg" },
+    ];
     switch (main) {
         case "Sunny":
-            return "./images/sunny1.jpg";
+            return picture[1].path;
         case "Clear":
-            return "./images/Cloudy.jpg";
+            return picture[2].path;
         case "Clouds":
-            return "./images/Cloudy3.jpg";
+            return picture[3].path;
         case "Stormy":
-            return "./images/stormy.jpg";
+            return picture[4].path;
         case "Snow":
-            return "./images/snow.jpg";
-        case "Stormy":
-            return "./images/stormy.jpg";
+            return picture[5].path;
         case "Thunder":
-            return "./images/Thunder.jpg";
+            return picture[6].path;
         case "Rain":
-            return "./images/Rain.jpg";
+            return picture[7].path;
         default:
-            return "./images/sunny3.jpg";
+            return picture[0].path;
     }
 }
